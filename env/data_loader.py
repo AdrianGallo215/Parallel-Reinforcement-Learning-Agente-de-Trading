@@ -21,3 +21,4 @@ def get_indicators(df):
     macd_df = ta.macd(df['Close'], fast = 12, slow = 26, signal = 9)
     df['macd_signal'] = macd_df['MACDs_12_26_9']
     return df
+
