@@ -49,7 +49,7 @@ class TradingEnv(gym.Env):
         self.info = ENVINFO
 
     def step(self, action):
-        price_now = self.data['close_norm'].iloc[self.current_step]
+        price_now = self.data['Close'].iloc[self.current_step]
         
         self._execute_action(action, price_now)
         
@@ -57,7 +57,7 @@ class TradingEnv(gym.Env):
         
         reward = self._get_reward(action)
         
-        self.prev_value = self.cash + self.shares * self.data['close_norm'].iloc[self.current_step]
+        self.prev_value = self.cash + self.shares * self.data['Close'].iloc[self.current_step]
         
         obs = self._get_obs()
         
@@ -72,7 +72,7 @@ class TradingEnv(gym.Env):
         return obs, float(reward), terminated, truncated, info
         
     def _get_reward(self, action):
-        asset_price = self.data['close_norm'].iloc[self.current_step]
+        asset_price = self.data['Close'].iloc[self.current_step]
         v_t = self.cash + self.shares * asset_price
 
         if self.prev_value == 0:

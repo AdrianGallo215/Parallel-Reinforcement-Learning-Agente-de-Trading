@@ -1,27 +1,23 @@
+import os
+
 import torch.multiprocessing as mp
+from env.data_loader import download_and_clean_data, get_train_test
+from training.a3c_worker import a3c_worker
+from model.actor_critic import ActorCritic
 from utils.workerLogger import WorkerLogger
 import time, random, queue, torch
 
-def worker_stub(worker_id, global_model, optimizer, train_data, n_episodes, metrics_queue):
-    """
-    Stub para probar el orquestador sin depender de a3c_worker.
-    Simula N episodios enviando métricas ficticias.
-    ESTE STUB DEBE IR EN EL MISMO ARCHIVO, DE LO CONTRARIO PODRÍA NO FUNCIONAR EL ORQUESTADOR PORQUE EL PROCESO NO ENCONTRARÍA LA FUNCIÓN.
-    """
-    logger = WorkerLogger(worker_id, metrics_queue)
-    for episode in range(n_episodes):
-        time.sleep(0.1)
-        logger.log_episode(episode, reward=random.uniform(-1, 3), final_portfolio_value=10000*(1+ random.uniform(-0.05, 0.1)), steps=random.randint(50, 200))  
-
-def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes_per_worker: int, metrics_queue: mp.Queue) -> list[dict]: 
+def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes_per_worker: int, metrics_queue: mp.Queue, use_lock: bool = False) -> list[dict]: 
     """
     Lanza n_workers procesos en paralelo.
     Devuelve la lista de todas las métricas recolectadas.
     """
+    lock = mp.Lock() if use_lock else None
+
     process = []
     try:
         for worker_id in range(n_workers):
-            p = mp.Process(target=worker_stub, args=(worker_id, global_model, optimizer, train_data, n_episodes_per_worker, metrics_queue))
+            p = mp.Process(target=a3c_worker, args=(worker_id, global_model, optimizer, train_data, n_episodes_per_worker, metrics_queue, lock))
             p.start()
             process.append(p)
         for p in process:
@@ -47,21 +43,49 @@ def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes
 if __name__ == "__main__":
 
     mp.set_start_method('spawn')
-    global_model = None
-    metrics_queue = mp.Queue(maxsize=0)
-    #optimizer = torch.optim.Adam(params=global_model.parameters(), lr = 1e-4)
-    optimizer = None
 
-    # for group in optimizer.param_groups:
-    #     for p in group['params']:
-    #         state = optimizer.state[p]
-    #         for k,v in state.items():
-    #             if isinstance(v, torch.Tensor):
-    #                 state[k] = v.share_memory_()
+    ticker = "AAPL"
+    df = download_and_clean_data(ticker, start="2020-01-01", end="2024-01-01")
+    train_data, test_data = get_train_test(df, test_ratio=0.2)
+    print(f"Train rows: {len(train_data)}, Test rows: {len(test_data)}")
+
+
+    obs_dim = 20 * 2 + 3
+    global_model = ActorCritic(obs_dim=obs_dim)
+    global_model.share_memory()
+    optimizer = torch.optim.Adam(params=global_model.parameters(), lr=1e-4)
+
+    probs, value = global_model(torch.zeros(obs_dim))
+
+    loss = value.sum()
+    loss.backward()
+
+    optimizer.step()
+    optimizer.zero_grad()
+
+    metrics_queue = mp.Queue(maxsize=0)
+
+    for group in optimizer.param_groups:
+        for p in group['params']:
+            state = optimizer.state[p]
+            for k,v in state.items():
+                if isinstance(v, torch.Tensor):
+                    state[k] = v.share_memory_()
 
     n_workers = 4
 
-    all_metrics = run_training(global_model, optimizer, None, n_workers, 10, metrics_queue)
-    print(all_metrics)
+    t0 = time.time()
+    all_metrics = run_training(global_model, optimizer, train_data, n_workers, 10, metrics_queue, use_lock=False)
+    elapsed = time.time() - t0
+    print(f"\nDone in {elapsed:.2f}s")
+    print(f"Total episodes logged: {len(all_metrics)}")
+    if all_metrics:
+        avg_reward = sum(m["total_reward"] for m in all_metrics) / len(all_metrics)
+        print(f"Avg reward: {avg_reward:.4f}")
+
+    # ── Save checkpoint ──
+    os.makedirs("checkpoints", exist_ok=True)
+    global_model.save_checkpoint("checkpoints/parallel_model.pt")
+    print("Checkpoint saved → checkpoints/parallel_model.pt")
 
 
