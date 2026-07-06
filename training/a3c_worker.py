@@ -17,6 +17,7 @@ Reference: Mnih et al., "Asynchronous Methods for Deep RL" (2016)
 
 import torch
 import numpy as np
+import time
 
 from env.trading_env import TradingEnv
 from model.actor_critic import ActorCritic
@@ -64,7 +65,7 @@ def a3c_worker(worker_id: int, global_model: ActorCritic,
                metrics_queue, lock=None,
                t_max: int = T_MAX, gamma: float = GAMMA,
                beta_entropy: float = BETA_ENTROPY,
-               value_coeff: float = VALUE_COEFF):
+               value_coeff: float = VALUE_COEFF, barrier = None):
     """
     A3C worker process.
 
@@ -98,6 +99,10 @@ def a3c_worker(worker_id: int, global_model: ActorCritic,
 
     # ── 3.  Logger ──
     logger = WorkerLogger(worker_id, metrics_queue)
+
+    # Barrera para evitar el arranque escalonado - algunos workers demoran hasta 30s en hacer las importaciones debido a usar spawn en Windows, con la barrera medimos el tiempo de cómputo real
+    if barrier is not None:
+        barrier.wait()  # Espera a que todos los workers estén listos
 
     # ── 4.  Training loop ──
     for episode in range(n_episodes):
@@ -141,7 +146,7 @@ def a3c_worker(worker_id: int, global_model: ActorCritic,
 
                 if done:
                     break
-
+            
             # ── Compute n-step returns & advantages ──
             # If not done, bootstrap with V(s_T)
             if not done:

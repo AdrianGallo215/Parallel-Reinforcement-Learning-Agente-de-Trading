@@ -14,15 +14,23 @@ def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes
     """
     lock = mp.Lock() if use_lock else None
 
+    barrier = mp.Barrier(n_workers + 1)
+
     process = []
     all_metrics = []
 
     try:
         for worker_id in range(n_workers):
-            p = mp.Process(target=a3c_worker, args=(worker_id, global_model, optimizer, train_data, n_episodes_per_worker, metrics_queue, lock))
+            p = mp.Process(target=a3c_worker, args=(worker_id, global_model, optimizer, train_data, n_episodes_per_worker, metrics_queue, lock), kwargs={"barrier": barrier},)
             p.start()
             process.append(p)
         
+        # El proceso principal espera a que TODOS los workers
+        # terminen su setup (imports, modelo local, entorno).
+        # Solo entonces empieza a medir tiempo de cómputo real.
+        barrier.wait()
+        t0 = time.time()
+
         while any(p.is_alive() for p in process):
             try:
                 metrics = metrics_queue.get(timeout=0.5)
@@ -33,6 +41,7 @@ def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes
         for p in process:
             p.join()
 
+        compute_elapsed = time.time() - t0
     finally:
         for p in process:
             if p.is_alive():
@@ -46,7 +55,7 @@ def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes
         except queue.Empty:
             break
 
-    return all_metrics
+    return all_metrics, compute_elapsed
 
 
 if __name__ == "__main__":
@@ -84,9 +93,9 @@ if __name__ == "__main__":
     n_workers = 4
 
     t0 = time.time()
-    all_metrics = run_training(global_model, optimizer, train_data, n_workers, 10, metrics_queue, use_lock=False)
+    all_metrics, compute_elapsed = run_training(global_model, optimizer, train_data, n_workers, 10, metrics_queue, use_lock=False)
     elapsed = time.time() - t0
-    print(f"\nDone in {elapsed:.2f}s")
+    print(f"\nDone in {elapsed:.2f}s (cómputo puro: {compute_elapsed:.2f}s)")
     print(f"Total episodes logged: {len(all_metrics)}")
     if all_metrics:
         avg_reward = sum(m["total_reward"] for m in all_metrics) / len(all_metrics)

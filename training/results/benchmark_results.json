@@ -1,22 +1,26 @@
 [
   {
     "n_workers": 1,
-    "elapsed": 11.423452377319336,
+    "elapsed": 7.348572254180908,
+    "elapsed_total": 11.493424654006958,
     "n_episodes_logged": 64
   },
   {
     "n_workers": 2,
-    "elapsed": 13.431545972824097,
+    "elapsed": 4.9104719161987305,
+    "elapsed_total": 12.151739358901978,
     "n_episodes_logged": 64
   },
   {
     "n_workers": 4,
-    "elapsed": 18.583558797836304,
+    "elapsed": 3.9593677520751953,
+    "elapsed_total": 17.51177954673767,
     "n_episodes_logged": 64
   },
   {
     "n_workers": 8,
-    "elapsed": 32.563515186309814,
+    "elapsed": 5.305887460708618,
+    "elapsed_total": 31.835772037506104,
     "n_episodes_logged": 64
   }
 ]

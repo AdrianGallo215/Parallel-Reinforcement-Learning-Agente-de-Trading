@@ -173,32 +173,33 @@ if __name__ == "__main__":
         )
         monitor.start()
 
-        t0 = time.time()
-        leftover = run_training(
+        t0_total = time.time()
+        leftover, compute_elapsed = run_training(
             global_model, optimizer, train_data,
             n_workers=n_workers,
             n_episodes_per_worker=episodes_per_worker,
             metrics_queue=metrics_queue,
             use_lock=USE_LOCK,
         )
-        elapsed = time.time() - t0
+        total_elapsed = time.time() - t0_total
 
         stop_event.set()
         monitor.join()
 
-        # run_training también drena la cola al terminar: cada métrica la
-        # consume exactamente uno de los dos, así que la unión es completa.
         for m in leftover:
             bars[m["worker_id"]].update(1)
         for b in bars:
             b.close()
         all_metrics = collected + leftover
 
-        print(f"Tiempo: {elapsed:.2f}s | Episodios logueados: {len(all_metrics)}")
+        print(f"Tiempo total (con arranque de procesos): {total_elapsed:.2f}s")
+        print(f"Tiempo de cómputo puro (post-barrera): {compute_elapsed:.2f}s")
+        print(f"Episodios logueados: {len(all_metrics)}")
 
         results.append({
             "n_workers": n_workers,
-            "elapsed": elapsed,
+            "elapsed": compute_elapsed,        # usa este para la curva de Amdahl
+            "elapsed_total": total_elapsed,     # dato honesto adicional para el informe
             "n_episodes_logged": len(all_metrics),
         })
 
