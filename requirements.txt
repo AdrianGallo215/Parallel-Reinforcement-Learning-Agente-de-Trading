@@ -1,3 +1,6 @@
 yfinance
 pandas_ta
 gymnasium
+scipy
+matplotlib
+tqdm

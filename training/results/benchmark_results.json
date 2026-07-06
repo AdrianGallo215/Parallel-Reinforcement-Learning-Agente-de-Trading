@@ -1,0 +1,22 @@
+[
+  {
+    "n_workers": 1,
+    "elapsed": 11.423452377319336,
+    "n_episodes_logged": 64
+  },
+  {
+    "n_workers": 2,
+    "elapsed": 13.431545972824097,
+    "n_episodes_logged": 64
+  },
+  {
+    "n_workers": 4,
+    "elapsed": 18.583558797836304,
+    "n_episodes_logged": 64
+  },
+  {
+    "n_workers": 8,
+    "elapsed": 32.563515186309814,
+    "n_episodes_logged": 64
+  }
+]

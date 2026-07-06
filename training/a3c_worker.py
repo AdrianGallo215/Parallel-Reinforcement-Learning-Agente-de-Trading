@@ -83,6 +83,8 @@ def a3c_worker(worker_id: int, global_model: ActorCritic,
     value_coeff     : critic loss weight
     """
 
+    torch.set_num_threads(1) #Solo 1 thread para operaciones tensoriales
+
     # ── 1.  Local model (same architecture, separate weights) ──
     obs_dim = global_model.shared[0].in_features
     n_actions = global_model.actor.out_features

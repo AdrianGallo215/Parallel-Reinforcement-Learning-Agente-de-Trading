@@ -15,20 +15,29 @@ def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes
     lock = mp.Lock() if use_lock else None
 
     process = []
+    all_metrics = []
+
     try:
         for worker_id in range(n_workers):
             p = mp.Process(target=a3c_worker, args=(worker_id, global_model, optimizer, train_data, n_episodes_per_worker, metrics_queue, lock))
             p.start()
             process.append(p)
+        
+        while any(p.is_alive() for p in process):
+            try:
+                metrics = metrics_queue.get(timeout=0.5)
+                all_metrics.append(metrics)
+            except queue.Empty:
+                continue
+        
         for p in process:
             p.join()
+
     finally:
         for p in process:
             if p.is_alive():
                 p.terminate()
                 p.join()
-
-    all_metrics = []
 
     while True:
         try:
