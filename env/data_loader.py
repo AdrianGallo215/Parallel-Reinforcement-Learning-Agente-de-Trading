@@ -1,5 +1,6 @@
 import yfinance as yf
 import pandas_ta as ta
+import pandas as pd
 
 def download_and_clean_data(ticker, start, end):
     raw_data = yf.download(ticker, start=start, end=end)
