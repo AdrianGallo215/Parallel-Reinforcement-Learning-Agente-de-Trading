@@ -36,10 +36,10 @@ from training.train_parallel import run_training
 #                        CONFIGURACIÓN                            #
 # ────────────────────────────────────────────────────────────── #
 TICKER = "AAPL"
-START = "2023-01-01"
+START = "2020-01-01"
 END = "2024-01-01"
-TOTAL_EPISODES = 64
-WORKER_COUNTS = [1, 2, 4, 8]
+TOTAL_EPISODES = 12000
+WORKER_COUNTS = [1, 2, 4, 8, 12]
 USE_LOCK = False   # A3C sin lock (Hogwild) — el diferenciador del proyecto
 
 
@@ -202,11 +202,13 @@ if __name__ == "__main__":
             "elapsed_total": total_elapsed,     # dato honesto adicional para el informe
             "n_episodes_logged": len(all_metrics),
         })
+        os.makedirs("results", exist_ok=True)
+        with open("results/benchmark_results.json", "w") as f:
+            json.dump(results, f, indent=2)
+        print("Resultados parciales guardados en results/benchmark_results.json")
 
     # ── Guardar resultados crudos ──
-    os.makedirs("results", exist_ok=True)
-    with open("results/benchmark_results.json", "w") as f:
-        json.dump(results, f, indent=2)
+
     print(f"\nResultados guardados en results/benchmark_results.json")
 
     # ── Graficar ──

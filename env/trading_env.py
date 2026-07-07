@@ -24,6 +24,11 @@ class TradingEnv(gym.Env):
         super().__init__()
 
         self.data = data
+        self._close      = data['Close'].to_numpy(dtype=np.float64)
+        self._close_norm = data['close_norm'].to_numpy(dtype=np.float32)
+        self._vol_norm   = data['volume_norm'].to_numpy(dtype=np.float32)
+        self._rsi        = data['RSI'].to_numpy(dtype=np.float32)
+        self._macd_sig   = data['macd_signal'].to_numpy(dtype=np.float32)
         self.window = window
         self.initial_cash = initial_cash
         self.trade_penalty = trade_penalty
@@ -49,7 +54,7 @@ class TradingEnv(gym.Env):
         self.info = ENVINFO
 
     def step(self, action):
-        price_now = self.data['Close'].iloc[self.current_step]
+        price_now = self._close[self.current_step]
         
         self._execute_action(action, price_now)
         
@@ -57,8 +62,7 @@ class TradingEnv(gym.Env):
         
         reward = self._get_reward(action)
         
-        self.prev_value = self.cash + self.shares * self.data['Close'].iloc[self.current_step]
-        
+        self.prev_value = self.cash + self.shares * self._close[self.current_step]          
         obs = self._get_obs()
         
         truncated = False
@@ -72,7 +76,7 @@ class TradingEnv(gym.Env):
         return obs, float(reward), terminated, truncated, info
         
     def _get_reward(self, action):
-        asset_price = self.data['Close'].iloc[self.current_step]
+        asset_price = self._close[self.current_step]
         v_t = self.cash + self.shares * asset_price
 
         if self.prev_value == 0:
@@ -119,15 +123,17 @@ class TradingEnv(gym.Env):
         return self._get_obs(), {}
     
     def _get_obs(self):
-        close_window = self.data['close_norm'].iloc[self.current_step - self.window + 1:self.current_step + 1].values
-        volume_window = self.data['volume_norm'].iloc[self.current_step - self.window + 1:self.current_step + 1].values
-        rsi = np.array([self.data['RSI'].iloc[self.current_step]])
-        macd_signal = np.array([self.data['macd_signal'].iloc[self.current_step]])
-        position = np.array([float(self.position)])
-        
-        obs = np.concatenate([close_window, volume_window, rsi, macd_signal, position])
+        i = self.current_step
+        w = self.window
+        close_window = self._close_norm[i - w + 1:i + 1]
+        volume_window = self._vol_norm[i - w + 1:i + 1]
+        rsi = self._rsi[i:i + 1]
+        macd_signal = self._macd_sig[i:i + 1]
+        position = np.array([self.position], dtype=np.float32)
 
+        obs = np.concatenate([close_window, volume_window, rsi, macd_signal, position])
         return obs.astype(np.float32)
+
 
     def render(self):
         pass
