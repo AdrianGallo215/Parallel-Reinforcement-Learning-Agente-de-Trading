@@ -49,9 +49,11 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
     step = 0
 
     with torch.no_grad():
+        prob_accum = np.zeros(3)
         while not done:
             obs_t = torch.FloatTensor(obs).unsqueeze(0)
             probs, value = model(obs_t)
+            prob_accum += probs.squeeze(0).numpy()
 
             # Greedy action (argmax)
             action = probs.argmax(dim=-1).item()
@@ -112,6 +114,8 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
         print(f"  Actions: Hold={dist[0]/total*100:.1f}%  "
               f"Buy={dist[1]/total*100:.1f}%  "
               f"Sell={dist[2]/total*100:.1f}%")
+        mean_probs = prob_accum / total
+        print(f"  Mean probs:      Hold={mean_probs[0]:.3f}  Buy={mean_probs[1]:.3f}  Sell={mean_probs[2]:.3f}")
 
     return results
 

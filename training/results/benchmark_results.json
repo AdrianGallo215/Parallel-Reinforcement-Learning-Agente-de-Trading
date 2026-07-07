@@ -1,32 +1,32 @@
 [
   {
     "n_workers": 1,
-    "elapsed": 2891.2574894428253,
-    "elapsed_total": 2895.2518095970154,
-    "n_episodes_logged": 12000
+    "elapsed": 70.40284156799316,
+    "elapsed_total": 75.15484690666199,
+    "n_episodes_logged": 96
   },
   {
     "n_workers": 2,
-    "elapsed": 1530.8469099998474,
-    "elapsed_total": 1538.5564229488373,
-    "n_episodes_logged": 12000
+    "elapsed": 47.28496551513672,
+    "elapsed_total": 55.9909086227417,
+    "n_episodes_logged": 96
   },
   {
     "n_workers": 4,
-    "elapsed": 882.8278887271881,
-    "elapsed_total": 896.0583457946777,
-    "n_episodes_logged": 12000
+    "elapsed": 29.261428356170654,
+    "elapsed_total": 44.43202805519104,
+    "n_episodes_logged": 96
   },
   {
     "n_workers": 8,
-    "elapsed": 624.1100087165833,
-    "elapsed_total": 649.8213973045349,
-    "n_episodes_logged": 12000
+    "elapsed": 34.014549255371094,
+    "elapsed_total": 60.46116399765015,
+    "n_episodes_logged": 96
   },
   {
     "n_workers": 12,
-    "elapsed": 550.1603417396545,
-    "elapsed_total": 587.8634476661682,
-    "n_episodes_logged": 12000
+    "elapsed": 21.815631866455078,
+    "elapsed_total": 60.82690906524658,
+    "n_episodes_logged": 96
   }
 ]

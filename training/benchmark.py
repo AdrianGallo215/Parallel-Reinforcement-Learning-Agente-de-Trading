@@ -38,7 +38,7 @@ from training.train_parallel import run_training
 TICKER = "AAPL"
 START = "2020-01-01"
 END = "2024-01-01"
-TOTAL_EPISODES = 12000
+TOTAL_EPISODES = 96
 WORKER_COUNTS = [1, 2, 4, 8, 12]
 USE_LOCK = False   # A3C sin lock (Hogwild) — el diferenciador del proyecto
 
@@ -191,6 +191,8 @@ if __name__ == "__main__":
         for b in bars:
             b.close()
         all_metrics = collected + leftover
+        from results.plot_results import save_metrics
+        save_metrics(all_metrics, f"results/metrics_n{n_workers}.json")
 
         print(f"Tiempo total (con arranque de procesos): {total_elapsed:.2f}s")
         print(f"Tiempo de cómputo puro (post-barrera): {compute_elapsed:.2f}s")

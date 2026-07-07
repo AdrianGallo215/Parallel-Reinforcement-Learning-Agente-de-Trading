@@ -5,6 +5,7 @@ from env.data_loader import download_and_clean_data, get_train_test
 from training.a3c_worker import a3c_worker
 from model.actor_critic import ActorCritic
 from utils.workerLogger import WorkerLogger
+from results.plot_results import save_metrics
 import time, random, queue, torch
 
 def run_training(global_model, optimizer, train_data, n_workers: int, n_episodes_per_worker: int, metrics_queue: mp.Queue, use_lock: bool = False) -> list[dict]: 
@@ -90,10 +91,11 @@ if __name__ == "__main__":
                 if isinstance(v, torch.Tensor):
                     state[k] = v.share_memory_()
 
-    n_workers = 4
+    n_workers = 12
 
     t0 = time.time()
-    all_metrics, compute_elapsed = run_training(global_model, optimizer, train_data, n_workers, 10, metrics_queue, use_lock=False)
+    all_metrics, compute_elapsed = run_training(global_model, optimizer, train_data, n_workers, 5000, metrics_queue, use_lock=False)
+    save_metrics(all_metrics, "results/metrics_full_train.json")
     elapsed = time.time() - t0
     print(f"\nDone in {elapsed:.2f}s (cómputo puro: {compute_elapsed:.2f}s)")
     print(f"Total episodes logged: {len(all_metrics)}")
