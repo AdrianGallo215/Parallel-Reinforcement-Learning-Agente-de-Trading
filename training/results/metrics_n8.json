@@ -1,0 +1,770 @@
+[
+  {
+    "worker_id": 6,
+    "episode": 0,
+    "total_reward": -0.14537705458419112,
+    "final_value": 9138.491657269466,
+    "steps": 97,
+    "timestamp": 1783385758.3828135
+  },
+  {
+    "worker_id": 3,
+    "episode": 0,
+    "total_reward": 0.08244285111029209,
+    "final_value": 12762.824125919664,
+    "steps": 300,
+    "timestamp": 1783385759.3727503
+  },
+  {
+    "worker_id": 1,
+    "episode": 0,
+    "total_reward": -0.11134301529723699,
+    "final_value": 10755.553894705155,
+    "steps": 357,
+    "timestamp": 1783385759.5767183
+  },
+  {
+    "worker_id": 5,
+    "episode": 0,
+    "total_reward": -0.07377854056021169,
+    "final_value": 11338.226710827343,
+    "steps": 405,
+    "timestamp": 1783385759.865015
+  },
+  {
+    "worker_id": 5,
+    "episode": 1,
+    "total_reward": -0.023828042982065582,
+    "final_value": 9865.458490983325,
+    "steps": 30,
+    "timestamp": 1783385760.0813951
+  },
+  {
+    "worker_id": 6,
+    "episode": 2,
+    "total_reward": 0.23266285243051935,
+    "final_value": 12862.316929469162,
+    "steps": 54,
+    "timestamp": 1783385760.254276
+  },
+  {
+    "worker_id": 2,
+    "episode": 0,
+    "total_reward": -0.09834273086945865,
+    "final_value": 11996.443966149194,
+    "steps": 604,
+    "timestamp": 1783385760.9868286
+  },
+  {
+    "worker_id": 5,
+    "episode": 2,
+    "total_reward": -0.18823497232712577,
+    "final_value": 8974.52196844523,
+    "steps": 239,
+    "timestamp": 1783385761.3294048
+  },
+  {
+    "worker_id": 3,
+    "episode": 1,
+    "total_reward": 0.1724317939357146,
+    "final_value": 14886.32451719796,
+    "steps": 560,
+    "timestamp": 1783385762.3038008
+  },
+  {
+    "worker_id": 3,
+    "episode": 2,
+    "total_reward": 0.03502535475984757,
+    "final_value": 10557.88566290513,
+    "steps": 34,
+    "timestamp": 1783385762.4880252
+  },
+  {
+    "worker_id": 0,
+    "episode": 3,
+    "total_reward": -0.14130563426687826,
+    "final_value": 10617.104673240532,
+    "steps": 447,
+    "timestamp": 1783385762.538623
+  },
+  {
+    "worker_id": 5,
+    "episode": 4,
+    "total_reward": -0.14698552510346966,
+    "final_value": 9978.441093631585,
+    "steps": 280,
+    "timestamp": 1783385764.0818975
+  },
+  {
+    "worker_id": 7,
+    "episode": 5,
+    "total_reward": -0.019552510051651123,
+    "final_value": 9926.955525490586,
+    "steps": 26,
+    "timestamp": 1783385764.3355541
+  },
+  {
+    "worker_id": 0,
+    "episode": 5,
+    "total_reward": -0.07771864291447615,
+    "final_value": 9442.715850537035,
+    "steps": 28,
+    "timestamp": 1783385764.7264163
+  },
+  {
+    "worker_id": 6,
+    "episode": 5,
+    "total_reward": 0.03116696280448352,
+    "final_value": 10476.097626777422,
+    "steps": 27,
+    "timestamp": 1783385764.8963537
+  },
+  {
+    "worker_id": 4,
+    "episode": 3,
+    "total_reward": 0.00021051809111088254,
+    "final_value": 15160.011750294618,
+    "steps": 691,
+    "timestamp": 1783385765.1407192
+  },
+  {
+    "worker_id": 2,
+    "episode": 3,
+    "total_reward": 0.0020178693428140933,
+    "final_value": 10818.559310421542,
+    "steps": 102,
+    "timestamp": 1783385765.622745
+  },
+  {
+    "worker_id": 5,
+    "episode": 6,
+    "total_reward": -0.04877082200325149,
+    "final_value": 9961.130382629672,
+    "steps": 58,
+    "timestamp": 1783385766.0779982
+  },
+  {
+    "worker_id": 1,
+    "episode": 2,
+    "total_reward": -0.4568391149145654,
+    "final_value": 9183.646215717243,
+    "steps": 582,
+    "timestamp": 1783385766.4407673
+  },
+  {
+    "worker_id": 0,
+    "episode": 6,
+    "total_reward": -0.17089776557065173,
+    "final_value": 11035.875089129617,
+    "steps": 409,
+    "timestamp": 1783385766.7826014
+  },
+  {
+    "worker_id": 5,
+    "episode": 7,
+    "total_reward": -0.03762163701336915,
+    "final_value": 11044.601817549144,
+    "steps": 231,
+    "timestamp": 1783385767.249579
+  },
+  {
+    "worker_id": 4,
+    "episode": 4,
+    "total_reward": -0.02199785626172833,
+    "final_value": 13012.094970751174,
+    "steps": 484,
+    "timestamp": 1783385767.620211
+  },
+  {
+    "worker_id": 6,
+    "episode": 6,
+    "total_reward": -0.4197229798659358,
+    "final_value": 9342.559376986754,
+    "steps": 638,
+    "timestamp": 1783385768.0991726
+  },
+  {
+    "worker_id": 0,
+    "episode": 7,
+    "total_reward": -0.05121157423501375,
+    "final_value": 10778.005798930011,
+    "steps": 332,
+    "timestamp": 1783385768.4115212
+  },
+  {
+    "worker_id": 1,
+    "episode": 4,
+    "total_reward": -0.3260366817034854,
+    "final_value": 8465.882211748902,
+    "steps": 510,
+    "timestamp": 1783385769.603773
+  },
+  {
+    "worker_id": 4,
+    "episode": 5,
+    "total_reward": -0.12174432168730678,
+    "final_value": 9778.694468132526,
+    "steps": 432,
+    "timestamp": 1783385769.7961838
+  },
+  {
+    "worker_id": 0,
+    "episode": 8,
+    "total_reward": 0.04825336662560341,
+    "final_value": 11933.815266512649,
+    "steps": 478,
+    "timestamp": 1783385770.87595
+  },
+  {
+    "worker_id": 1,
+    "episode": 5,
+    "total_reward": 0.4111625203681363,
+    "final_value": 16690.603321598835,
+    "steps": 360,
+    "timestamp": 1783385771.503038
+  },
+  {
+    "worker_id": 2,
+    "episode": 6,
+    "total_reward": 0.059113968883132084,
+    "final_value": 11517.107774934262,
+    "steps": 185,
+    "timestamp": 1783385772.103064
+  },
+  {
+    "worker_id": 0,
+    "episode": 9,
+    "total_reward": -0.2052348142662368,
+    "final_value": 9627.903852707692,
+    "steps": 352,
+    "timestamp": 1783385772.721025
+  },
+  {
+    "worker_id": 2,
+    "episode": 7,
+    "total_reward": -0.15365945840117995,
+    "final_value": 9264.0308403497,
+    "steps": 162,
+    "timestamp": 1783385773.019329
+  },
+  {
+    "worker_id": 7,
+    "episode": 8,
+    "total_reward": 0.13315898315597285,
+    "final_value": 14888.680225141594,
+    "steps": 647,
+    "timestamp": 1783385773.1554248
+  },
+  {
+    "worker_id": 5,
+    "episode": 10,
+    "total_reward": 0.07104438361907436,
+    "final_value": 10856.792139964246,
+    "steps": 17,
+    "timestamp": 1783385773.3322406
+  },
+  {
+    "worker_id": 6,
+    "episode": 9,
+    "total_reward": 0.11360267985144036,
+    "final_value": 11686.817250520526,
+    "steps": 60,
+    "timestamp": 1783385773.636243
+  },
+  {
+    "worker_id": 5,
+    "episode": 11,
+    "total_reward": 0.03263539805175156,
+    "final_value": 10803.718412285752,
+    "steps": 76,
+    "timestamp": 1783385773.7292418
+  },
+  {
+    "worker_id": 6,
+    "episode": 10,
+    "total_reward": 0.055409542696047066,
+    "final_value": 11774.272116969325,
+    "steps": 169,
+    "timestamp": 1783385774.5472562
+  },
+  {
+    "worker_id": 4,
+    "episode": 10,
+    "total_reward": 0.012669252791424956,
+    "final_value": 16043.97469664265,
+    "steps": 722,
+    "timestamp": 1783385775.889647
+  },
+  {
+    "worker_id": 7,
+    "episode": 10,
+    "total_reward": -0.36552561856140003,
+    "final_value": 9463.822665482767,
+    "steps": 449,
+    "timestamp": 1783385776.1044514
+  },
+  {
+    "worker_id": 1,
+    "episode": 8,
+    "total_reward": 0.06229141855733858,
+    "final_value": 16496.268428993877,
+    "steps": 671,
+    "timestamp": 1783385776.5310738
+  },
+  {
+    "worker_id": 6,
+    "episode": 11,
+    "total_reward": 0.28677429056135945,
+    "final_value": 20824.738204851004,
+    "steps": 684,
+    "timestamp": 1783385777.9389405
+  },
+  {
+    "worker_id": 4,
+    "episode": 11,
+    "total_reward": -0.2727364570185969,
+    "final_value": 10681.48922163424,
+    "steps": 496,
+    "timestamp": 1783385778.27521
+  },
+  {
+    "worker_id": 2,
+    "episode": 9,
+    "total_reward": -0.05128830425623036,
+    "final_value": 14516.937849725666,
+    "steps": 642,
+    "timestamp": 1783385779.258135
+  },
+  {
+    "worker_id": 7,
+    "episode": 11,
+    "total_reward": -0.5360878150560319,
+    "final_value": 8950.494707298083,
+    "steps": 647,
+    "timestamp": 1783385779.4340289
+  },
+  {
+    "worker_id": 2,
+    "episode": 10,
+    "total_reward": 0.15047715330270534,
+    "final_value": 13100.02447117858,
+    "steps": 182,
+    "timestamp": 1783385780.364745
+  },
+  {
+    "worker_id": 2,
+    "episode": 11,
+    "total_reward": 0.007599041310325284,
+    "final_value": 11218.493600751877,
+    "steps": 159,
+    "timestamp": 1783385781.1113992
+  },
+  {
+    "worker_id": 3,
+    "episode": 11,
+    "total_reward": -0.23213636751759525,
+    "final_value": 13267.00845988324,
+    "steps": 722,
+    "timestamp": 1783385782.3944664
+  },
+  {
+    "worker_id": 4,
+    "episode": 0,
+    "total_reward": -0.08674271876201789,
+    "final_value": 9503.082176027132,
+    "steps": 65,
+    "timestamp": 1783385758.1704624
+  },
+  {
+    "worker_id": 0,
+    "episode": 0,
+    "total_reward": 0.05461371084209153,
+    "final_value": 11453.538120885589,
+    "steps": 170,
+    "timestamp": 1783385758.656037
+  },
+  {
+    "worker_id": 7,
+    "episode": 0,
+    "total_reward": -0.011291343638249466,
+    "final_value": 11684.496079526984,
+    "steps": 306,
+    "timestamp": 1783385759.3794935
+  },
+  {
+    "worker_id": 7,
+    "episode": 1,
+    "total_reward": 0.0342844702499714,
+    "final_value": 10382.585890857505,
+    "steps": 14,
+    "timestamp": 1783385759.4799507
+  },
+  {
+    "worker_id": 7,
+    "episode": 2,
+    "total_reward": 0.09758116810097678,
+    "final_value": 11282.884754977775,
+    "steps": 50,
+    "timestamp": 1783385759.762463
+  },
+  {
+    "worker_id": 6,
+    "episode": 1,
+    "total_reward": -0.2527131713884684,
+    "final_value": 8802.799694063835,
+    "steps": 296,
+    "timestamp": 1783385759.9241686
+  },
+  {
+    "worker_id": 0,
+    "episode": 1,
+    "total_reward": -0.22240878759854651,
+    "final_value": 9123.387750545124,
+    "steps": 270,
+    "timestamp": 1783385760.113528
+  },
+  {
+    "worker_id": 0,
+    "episode": 2,
+    "total_reward": -0.03745044640447497,
+    "final_value": 9753.707523653946,
+    "steps": 26,
+    "timestamp": 1783385760.2612162
+  },
+  {
+    "worker_id": 4,
+    "episode": 1,
+    "total_reward": -0.05930222245052891,
+    "final_value": 11491.523516784328,
+    "steps": 403,
+    "timestamp": 1783385760.3084173
+  },
+  {
+    "worker_id": 2,
+    "episode": 1,
+    "total_reward": 0.07801352193922302,
+    "final_value": 10883.11721089301,
+    "steps": 14,
+    "timestamp": 1783385761.0959435
+  },
+  {
+    "worker_id": 4,
+    "episode": 2,
+    "total_reward": 0.019340369075865768,
+    "final_value": 11130.614135041918,
+    "steps": 237,
+    "timestamp": 1783385761.50939
+  },
+  {
+    "worker_id": 6,
+    "episode": 3,
+    "total_reward": -0.005351612211482189,
+    "final_value": 12124.205287730112,
+    "steps": 419,
+    "timestamp": 1783385762.3750632
+  },
+  {
+    "worker_id": 5,
+    "episode": 3,
+    "total_reward": -0.043122498003182436,
+    "final_value": 10915.163385005391,
+    "steps": 229,
+    "timestamp": 1783385762.5348794
+  },
+  {
+    "worker_id": 1,
+    "episode": 1,
+    "total_reward": 0.5166304054576942,
+    "final_value": 23178.803965572217,
+    "steps": 729,
+    "timestamp": 1783385763.5539553
+  },
+  {
+    "worker_id": 7,
+    "episode": 3,
+    "total_reward": 0.5131361297746979,
+    "final_value": 23965.885504887876,
+    "steps": 732,
+    "timestamp": 1783385763.6986606
+  },
+  {
+    "worker_id": 7,
+    "episode": 4,
+    "total_reward": -0.03257811316310347,
+    "final_value": 10284.042157827225,
+    "steps": 99,
+    "timestamp": 1783385764.20164
+  },
+  {
+    "worker_id": 0,
+    "episode": 4,
+    "total_reward": -0.6496959795093253,
+    "final_value": 6415.6220691509725,
+    "steps": 379,
+    "timestamp": 1783385764.5782082
+  },
+  {
+    "worker_id": 6,
+    "episode": 4,
+    "total_reward": -0.24360724423734878,
+    "final_value": 10063.861761904824,
+    "steps": 439,
+    "timestamp": 1783385764.7585773
+  },
+  {
+    "worker_id": 2,
+    "episode": 2,
+    "total_reward": -0.034850547828318056,
+    "final_value": 14902.686582644052,
+    "steps": 757,
+    "timestamp": 1783385765.0927145
+  },
+  {
+    "worker_id": 3,
+    "episode": 3,
+    "total_reward": -0.15924340299508724,
+    "final_value": 11886.34971292745,
+    "steps": 541,
+    "timestamp": 1783385765.4005535
+  },
+  {
+    "worker_id": 5,
+    "episode": 5,
+    "total_reward": -0.29974072163741905,
+    "final_value": 9195.50912416524,
+    "steps": 335,
+    "timestamp": 1783385765.7910872
+  },
+  {
+    "worker_id": 7,
+    "episode": 6,
+    "total_reward": -0.1712981062539416,
+    "final_value": 11780.224535316225,
+    "steps": 489,
+    "timestamp": 1783385766.7469113
+  },
+  {
+    "worker_id": 1,
+    "episode": 3,
+    "total_reward": 0.12533616343160678,
+    "final_value": 12159.73542308779,
+    "steps": 127,
+    "timestamp": 1783385767.090798
+  },
+  {
+    "worker_id": 2,
+    "episode": 4,
+    "total_reward": -0.3056589582130439,
+    "final_value": 9059.323208908334,
+    "steps": 353,
+    "timestamp": 1783385767.393627
+  },
+  {
+    "worker_id": 3,
+    "episode": 4,
+    "total_reward": -0.054022964963029184,
+    "final_value": 12480.521553435874,
+    "steps": 472,
+    "timestamp": 1783385767.7904596
+  },
+  {
+    "worker_id": 3,
+    "episode": 5,
+    "total_reward": -0.25106703322719,
+    "final_value": 8380.24549293107,
+    "steps": 265,
+    "timestamp": 1783385769.0810676
+  },
+  {
+    "worker_id": 5,
+    "episode": 8,
+    "total_reward": -0.04919257598915569,
+    "final_value": 10912.173736311921,
+    "steps": 452,
+    "timestamp": 1783385769.4896178
+  },
+  {
+    "worker_id": 7,
+    "episode": 7,
+    "total_reward": -0.07186883053149483,
+    "final_value": 11305.28564400522,
+    "steps": 599,
+    "timestamp": 1783385769.753825
+  },
+  {
+    "worker_id": 6,
+    "episode": 7,
+    "total_reward": -0.11710742382168038,
+    "final_value": 9852.407955634513,
+    "steps": 461,
+    "timestamp": 1783385770.3967264
+  },
+  {
+    "worker_id": 4,
+    "episode": 6,
+    "total_reward": 0.23674866248561433,
+    "final_value": 13092.139483757912,
+    "steps": 200,
+    "timestamp": 1783385770.8677268
+  },
+  {
+    "worker_id": 2,
+    "episode": 5,
+    "total_reward": 0.2559647331575111,
+    "final_value": 15536.826736030542,
+    "steps": 751,
+    "timestamp": 1783385771.181642
+  },
+  {
+    "worker_id": 4,
+    "episode": 7,
+    "total_reward": -0.023112101872025233,
+    "final_value": 10084.43539956704,
+    "steps": 124,
+    "timestamp": 1783385771.4824786
+  },
+  {
+    "worker_id": 4,
+    "episode": 8,
+    "total_reward": 0.20477979283324166,
+    "final_value": 12635.764349617566,
+    "steps": 55,
+    "timestamp": 1783385771.7865357
+  },
+  {
+    "worker_id": 4,
+    "episode": 9,
+    "total_reward": 0.07142891891359246,
+    "final_value": 11113.025056069826,
+    "steps": 56,
+    "timestamp": 1783385772.0633774
+  },
+  {
+    "worker_id": 1,
+    "episode": 6,
+    "total_reward": 0.12318783281700307,
+    "final_value": 12489.194502957429,
+    "steps": 216,
+    "timestamp": 1783385772.6676307
+  },
+  {
+    "worker_id": 3,
+    "episode": 6,
+    "total_reward": 0.7624330623073551,
+    "final_value": 27693.958869860846,
+    "steps": 751,
+    "timestamp": 1783385772.9881222
+  },
+  {
+    "worker_id": 1,
+    "episode": 7,
+    "total_reward": 0.01328460186684235,
+    "final_value": 10622.285362235903,
+    "steps": 66,
+    "timestamp": 1783385773.0474002
+  },
+  {
+    "worker_id": 5,
+    "episode": 9,
+    "total_reward": 0.038191262997577635,
+    "final_value": 13558.946700851222,
+    "steps": 710,
+    "timestamp": 1783385773.2495477
+  },
+  {
+    "worker_id": 6,
+    "episode": 8,
+    "total_reward": -0.18952403300689824,
+    "final_value": 10833.963406872641,
+    "steps": 559,
+    "timestamp": 1783385773.337531
+  },
+  {
+    "worker_id": 3,
+    "episode": 7,
+    "total_reward": 0.07529002909336004,
+    "final_value": 11423.793077995248,
+    "steps": 92,
+    "timestamp": 1783385773.4852445
+  },
+  {
+    "worker_id": 7,
+    "episode": 9,
+    "total_reward": 0.046470382996356516,
+    "final_value": 11188.401966167163,
+    "steps": 108,
+    "timestamp": 1783385773.7215223
+  },
+  {
+    "worker_id": 3,
+    "episode": 8,
+    "total_reward": 0.08555289398399347,
+    "final_value": 12270.797295223416,
+    "steps": 184,
+    "timestamp": 1783385774.4614224
+  },
+  {
+    "worker_id": 0,
+    "episode": 10,
+    "total_reward": -0.14660699780730654,
+    "final_value": 10825.905768039474,
+    "steps": 359,
+    "timestamp": 1783385774.6388085
+  },
+  {
+    "worker_id": 2,
+    "episode": 8,
+    "total_reward": -0.04689653384950169,
+    "final_value": 13694.2795601224,
+    "steps": 554,
+    "timestamp": 1783385775.9566112
+  },
+  {
+    "worker_id": 0,
+    "episode": 11,
+    "total_reward": -0.2177809774934992,
+    "final_value": 11403.411553198704,
+    "steps": 514,
+    "timestamp": 1783385777.1568744
+  },
+  {
+    "worker_id": 3,
+    "episode": 9,
+    "total_reward": 0.18996406682919834,
+    "final_value": 19938.79407008081,
+    "steps": 728,
+    "timestamp": 1783385778.1290915
+  },
+  {
+    "worker_id": 3,
+    "episode": 10,
+    "total_reward": -0.05120071229629966,
+    "final_value": 10731.431742150206,
+    "steps": 207,
+    "timestamp": 1783385779.3388555
+  },
+  {
+    "worker_id": 1,
+    "episode": 9,
+    "total_reward": -0.08985057060580444,
+    "final_value": 13318.901909377179,
+    "steps": 578,
+    "timestamp": 1783385779.5540824
+  },
+  {
+    "worker_id": 1,
+    "episode": 10,
+    "total_reward": -0.1873904120914768,
+    "final_value": 12052.544210020527,
+    "steps": 524,
+    "timestamp": 1783385781.9459956
+  },
+  {
+    "worker_id": 1,
+    "episode": 11,
+    "total_reward": -0.14563465105431925,
+    "final_value": 9619.606814232047,
+    "steps": 147,
+    "timestamp": 1783385782.3484318
+  }
+]

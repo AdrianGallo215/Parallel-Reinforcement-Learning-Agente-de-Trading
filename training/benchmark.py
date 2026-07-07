@@ -27,7 +27,7 @@ from tqdm import tqdm
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from env.data_loader import download_and_clean_data, get_train_test
+from env.data_loader import download_and_clean_data, get_train_test, standardize_features
 from model.actor_critic import ActorCritic
 from training.train_parallel import run_training
 
@@ -38,7 +38,7 @@ from training.train_parallel import run_training
 TICKER = "AAPL"
 START = "2020-01-01"
 END = "2024-01-01"
-TOTAL_EPISODES = 12000
+TOTAL_EPISODES = 96
 WORKER_COUNTS = [1, 2, 4, 8, 12]
 USE_LOCK = False   # A3C sin lock (Hogwild) — el diferenciador del proyecto
 
@@ -141,7 +141,8 @@ if __name__ == "__main__":
 
     # ── Datos (una sola descarga para todo el benchmark) ──
     df = download_and_clean_data(TICKER, start=START, end=END)
-    train_data, _ = get_train_test(df, test_ratio=0.2)
+    train_data, test_data = get_train_test(df, test_ratio=0.2)
+    train_data, test_data = standardize_features(train_data, test_data)
     print(f"Train rows: {len(train_data)}")
 
     obs_dim = 20 * 2 + 3  # 43
@@ -191,6 +192,8 @@ if __name__ == "__main__":
         for b in bars:
             b.close()
         all_metrics = collected + leftover
+        from results.plot_results import save_metrics
+        save_metrics(all_metrics, f"results/metrics_n{n_workers}.json")
 
         print(f"Tiempo total (con arranque de procesos): {total_elapsed:.2f}s")
         print(f"Tiempo de cómputo puro (post-barrera): {compute_elapsed:.2f}s")

@@ -40,18 +40,22 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
     model.eval()
 
     total_reward = 0.0
-    n_trades = 0
+    n_trades = 0            # trades REALMENTE ejecutados (no intentos)
+    n_blocked = 0            # intentos de Buy/Sell que el entorno bloqueó
     daily_returns = []
     actions_taken = []
+    positions = [env.position]
     prev_portfolio = initial_cash
 
     done = False
     step = 0
 
     with torch.no_grad():
+        prob_accum = np.zeros(3)
         while not done:
             obs_t = torch.FloatTensor(obs).unsqueeze(0)
             probs, value = model(obs_t)
+            prob_accum += probs.squeeze(0).numpy()
 
             # Greedy action (argmax)
             action = probs.argmax(dim=-1).item()
@@ -61,9 +65,13 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
 
             total_reward += reward
             actions_taken.append(action)
+            positions.append(info["position"])
 
-            if action in (1, 2):  # Buy or Sell
-                n_trades += 1
+            if action in (1, 2):
+                if info["trade_executed"]:
+                    n_trades += 1
+                else:
+                    n_blocked += 1
 
             # Track daily portfolio returns
             portfolio = info["portfolio_value"]
@@ -82,11 +90,18 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
     else:
         sharpe = 0.0
 
+    # Cuántas veces la posición REALMENTE cambió a lo largo del episodio
+    # (0->1 o 1->0). Si esto es <=1, el agente compró (o vendió) una vez
+    # y nunca más volvió a operar: es Buy&Hold disfrazado, no timing real.
+    position_changes = sum(1 for a, b in zip(positions[:-1], positions[1:]) if a != b)
+
     results = {
         "final_value": final_value,
         "total_return_pct": total_return,
         "total_reward": total_reward,
         "n_trades": n_trades,
+        "n_trades_blocked": n_blocked,
+        "n_position_changes": position_changes,
         "n_steps": step,
         "sharpe_ratio": sharpe,
         "actions": actions_taken,
@@ -101,7 +116,9 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
         print(f"  Total return:    {total_return:+.2f}%")
         print(f"  Total reward:    {total_reward:.4f}")
         print(f"  Steps:           {step}")
-        print(f"  Trades:          {n_trades}")
+        print(f"  Trades ejecutados:      {n_trades}")
+        print(f"  Intentos bloqueados:    {n_blocked}  (ya en esa posición)")
+        print(f"  Cambios reales de posición: {position_changes}")
         print(f"  Sharpe ratio:    {sharpe:.4f}")
         print(f"{'='*50}")
 
@@ -112,6 +129,8 @@ def evaluate(model: ActorCritic, test_data, window: int = 20,
         print(f"  Actions: Hold={dist[0]/total*100:.1f}%  "
               f"Buy={dist[1]/total*100:.1f}%  "
               f"Sell={dist[2]/total*100:.1f}%")
+        mean_probs = prob_accum / total
+        print(f"  Mean probs:      Hold={mean_probs[0]:.3f}  Buy={mean_probs[1]:.3f}  Sell={mean_probs[2]:.3f}")
 
     return results
 

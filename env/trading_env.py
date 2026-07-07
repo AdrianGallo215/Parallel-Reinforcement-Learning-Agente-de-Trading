@@ -56,11 +56,11 @@ class TradingEnv(gym.Env):
     def step(self, action):
         price_now = self._close[self.current_step]
         
-        self._execute_action(action, price_now)
+        trade_executed = self._execute_action(action, price_now)
         
         self.current_step += 1
         
-        reward = self._get_reward(action)
+        reward = self._get_reward(trade_executed)
         
         self.prev_value = self.cash + self.shares * self._close[self.current_step]          
         obs = self._get_obs()
@@ -69,13 +69,14 @@ class TradingEnv(gym.Env):
         info = {
             "portfolio_value": self.prev_value,
             "position": self.position,
-            "step": self.current_step
+            "step": self.current_step,
+            "trade_executed": trade_executed,
         }
         terminated = self.current_step >= self.max_step
         
         return obs, float(reward), terminated, truncated, info
         
-    def _get_reward(self, action):
+    def _get_reward(self, trade_executed):
         asset_price = self._close[self.current_step]
         v_t = self.cash + self.shares * asset_price
 
@@ -84,29 +85,30 @@ class TradingEnv(gym.Env):
         else:
             r_t = (v_t - self.prev_value) / self.prev_value
     
-        if action != 0: #HOLD
+        if trade_executed:
             reward = r_t - self.trade_penalty
         else: 
             reward = r_t
 
         return float(reward)
 
-    def _execute_action(self, action, asset_price):
+    def _execute_action(self, action, asset_price): 
         if action == 1: #BUY
             if self.position == 1 or self.shares > 0:
-                return
+                return False
             self.shares = self.cash / asset_price
             self.cash = 0.0
             self.position = 1
+            return True
         elif action == 2: #SELL
             if self.position == 0 or self.shares == 0:
-                return
+                return False
             self.cash = self.shares * asset_price
             self.shares = 0.0
             self.position = 0
+            return True
         elif action == 0: #HOLD
-            pass
-
+            return False
 
 
     def reset(self, seed=None, options=None):
