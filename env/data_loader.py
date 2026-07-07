@@ -19,6 +19,18 @@ def get_train_test(df, test_ratio = 0.2):
     test_data = df.iloc[split_idx:].copy()
     return train_data, test_data
 
+def standardize_features(train_data, test_data, cols=("RSI", "macd_signal")):
+    """Z-score usando media/std del TRAIN, aplicado igual a train y test.
+    No usar .std()/.mean() del test: eso filtraría información del futuro."""
+    train_data = train_data.copy()
+    test_data = test_data.copy()
+    for col in cols:
+        mu = train_data[col].mean()
+        sigma = train_data[col].std()
+        train_data[col] = (train_data[col] - mu) / sigma
+        test_data[col] = (test_data[col] - mu) / sigma
+    return train_data, test_data
+
 def get_indicators(df):
     close = df['Close'].squeeze()
     df['RSI'] = ta.rsi(close, length=14)

@@ -69,7 +69,8 @@ class TradingEnv(gym.Env):
         info = {
             "portfolio_value": self.prev_value,
             "position": self.position,
-            "step": self.current_step
+            "step": self.current_step,
+            "trade_executed": trade_executed,
         }
         terminated = self.current_step >= self.max_step
         

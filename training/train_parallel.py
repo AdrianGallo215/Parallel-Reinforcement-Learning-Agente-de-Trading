@@ -1,7 +1,7 @@
 import os
 
 import torch.multiprocessing as mp
-from env.data_loader import download_and_clean_data, get_train_test
+from env.data_loader import download_and_clean_data, get_train_test, standardize_features
 from training.a3c_worker import a3c_worker
 from model.actor_critic import ActorCritic
 from utils.workerLogger import WorkerLogger
@@ -66,6 +66,7 @@ if __name__ == "__main__":
     ticker = "AAPL"
     df = download_and_clean_data(ticker, start="2020-01-01", end="2024-01-01")
     train_data, test_data = get_train_test(df, test_ratio=0.2)
+    train_data, test_data = standardize_features(train_data, test_data) 
     print(f"Train rows: {len(train_data)}, Test rows: {len(test_data)}")
 
 

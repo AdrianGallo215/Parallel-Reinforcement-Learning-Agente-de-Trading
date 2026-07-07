@@ -27,7 +27,7 @@ from tqdm import tqdm
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from env.data_loader import download_and_clean_data, get_train_test
+from env.data_loader import download_and_clean_data, get_train_test, standardize_features
 from model.actor_critic import ActorCritic
 from training.train_parallel import run_training
 
@@ -141,7 +141,8 @@ if __name__ == "__main__":
 
     # ── Datos (una sola descarga para todo el benchmark) ──
     df = download_and_clean_data(TICKER, start=START, end=END)
-    train_data, _ = get_train_test(df, test_ratio=0.2)
+    train_data, test_data = get_train_test(df, test_ratio=0.2)
+    train_data, test_data = standardize_features(train_data, test_data)
     print(f"Train rows: {len(train_data)}")
 
     obs_dim = 20 * 2 + 3  # 43

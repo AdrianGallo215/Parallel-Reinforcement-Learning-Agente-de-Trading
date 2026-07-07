@@ -178,6 +178,7 @@ def a3c_worker(worker_id: int, global_model: ActorCritic,
 
             # ── Backprop on LOCAL model ──
             optimizer.zero_grad()
+            local_model.zero_grad() 
             total_loss.backward()
 
             # Gradient clipping (stabilizes A3C)
